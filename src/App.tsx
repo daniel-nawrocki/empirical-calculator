@@ -5,33 +5,6 @@ function toFixed(value: number, digits = 2): string {
   return Number.isFinite(value) ? value.toFixed(digits) : "-";
 }
 
-function toCsv(cells: (string | number)[][]): string {
-  return cells
-    .map((row) =>
-      row
-        .map((cell) => {
-          const text = String(cell);
-          if (text.includes(",") || text.includes('"') || text.includes("\n")) {
-            return `"${text.split('"').join('""')}"`;
-          }
-          return text;
-        })
-        .join(",")
-    )
-    .join("\n");
-}
-
-function downloadCsv(filename: string, rows: (string | number)[][]): void {
-  const content = toCsv(rows);
-  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = filename;
-  link.click();
-  URL.revokeObjectURL(url);
-}
-
 export default function App() {
   const [rockType, setRockType] = useState<RockType>("Granite/Hard Limestone");
   const [faceHeight, setFaceHeight] = useState("30");
@@ -64,53 +37,12 @@ export default function App() {
 
   const timestamp = useMemo(() => new Date().toLocaleString(), []);
 
-  const handleCalculatorCsv = () => {
-    if (!calcOutput) return;
-    downloadCsv("pattern-footage-calculator.csv", [
-      [
-        "Rock Type",
-        "Pattern Type",
-        "Face Height (ft)",
-        "Effective Face Height (ft)",
-        "Dh (in)",
-        "R",
-        "Band",
-        "Constant",
-        "PF (ft^2)",
-        "Burden B (ft)",
-        "Spacing S (ft)",
-        "Subdrill J (ft)",
-        "Calculated Stemming (ft)",
-        "Initiation"
-      ],
-      [
-        rockType,
-        patternType,
-        faceHeight,
-        toFixed(calcOutput.effectiveFaceHeightFt),
-        dh,
-        toFixed(calcOutput.ratioR, 3),
-        calcOutput.band,
-        calcOutput.empiricalConstant,
-        toFixed(calcOutput.patternFootage, 3),
-        toFixed(calcOutput.burden, 3),
-        toFixed(calcOutput.spacing, 3),
-        toFixed(calcOutput.subdrill, 3),
-        toFixed(calcOutput.stemming, 3),
-        initiation
-      ]
-    ]);
-  };
-
   return (
     <div className="app">
       <header className="topbar no-print">
         <h1>Pattern Footage Empirical Calculator</h1>
         <div className="actions">
           <button onClick={() => window.print()}>Print / Save PDF</button>
-          <button onClick={handleCalculatorCsv} disabled={!calcOutput}>
-            Download CSV
-          </button>
         </div>
       </header>
 

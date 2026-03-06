@@ -11,7 +11,6 @@ Single-page offline React + Vite app for Dyno Nobel Pattern Footage empirical ca
   - Warnings for out-of-range ratios and invalid inputs.
 - Export and print:
   - `Print / Save PDF` for clean landscape report output.
-  - `Download CSV` for calculator results.
 - Shared calculation logic in `src/lib/patternFootage.ts`.
 - Unit tests (Vitest) for band selection and PF calculation.
 
