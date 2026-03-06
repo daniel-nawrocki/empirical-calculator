@@ -38,6 +38,19 @@ Single-page offline React + Vite app for Dyno Nobel Pattern Footage empirical ca
    npm run build
    ```
 
+## Build Windows Installer (NSIS)
+
+1. Build the app:
+   ```bash
+   npm run build
+   ```
+2. Compile installer (requires NSIS + `makensis` on PATH):
+   ```bash
+   makensis installer\PatternFootageEmpiricalCalculator.nsi
+   ```
+3. Output:
+   - `PatternFootageEmpiricalCalculator-Setup-1.0.0.exe`
+
 ## Notes
 
 - No backend required; all calculations run in the browser.
