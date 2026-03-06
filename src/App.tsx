@@ -10,7 +10,7 @@ export default function App() {
   const [faceHeight, setFaceHeight] = useState("30");
   const [dh, setDh] = useState("6.5");
   const [patternType, setPatternType] = useState<PatternType>("Square");
-  const [initiation, setInitiation] = useState<InitiationType>("Bottom");
+  const initiation: InitiationType = "Top and Bottom";
 
   const faceHeightNum = Number(faceHeight);
   const dhNum = Number(dh);
@@ -33,7 +33,7 @@ export default function App() {
       patternType,
       initiation
     });
-  }, [calcErrors.length, dhNum, faceHeightNum, initiation, patternType, rockType]);
+  }, [calcErrors.length, dhNum, faceHeightNum, patternType, rockType]);
 
   const timestamp = useMemo(() => new Date().toLocaleString(), []);
 
@@ -82,14 +82,6 @@ export default function App() {
             <select value={patternType} onChange={(e) => setPatternType(e.target.value as PatternType)}>
               <option value="Square">Square</option>
               <option value="Rectangular">Rectangular</option>
-            </select>
-          </label>
-
-          <label>
-            Initiation
-            <select value={initiation} onChange={(e) => setInitiation(e.target.value as InitiationType)}>
-              <option value="Bottom">Bottom</option>
-              <option value="Top and Bottom">Top and Bottom</option>
             </select>
           </label>
 
@@ -147,9 +139,8 @@ export default function App() {
                 </div>
                 <div>
                   <span className="label">
-                    Calculated Stemming ={" "}
-                    {calcOutput.band === "E" ? "0.70B (Band E override)" : initiation === "Bottom" ? "0.50B" : "0.70B"} (
-                    {initiation})
+                    Calculated Stemming = {calcOutput.band === "E" ? "0.70B (Band E override)" : "0.70B"} (Top and Bottom
+                    initiation)
                   </span>
                   <span>{toFixed(calcOutput.stemming, 3)} ft</span>
                 </div>

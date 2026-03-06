@@ -5,9 +5,9 @@ Single-page offline React + Vite app for Dyno Nobel Pattern Footage empirical ca
 ## Features
 
 - Calculator Mode:
-  - Inputs for rock type, face height, Dh, pattern type, and initiation type.
+  - Inputs for rock type, face height, Dh, and pattern type.
   - Automatic empirical band (A-E) and constant selection.
-  - Computes PF, burden (B), spacing (S), subdrill (J), and calculated stemming, with Band E stemming fixed at 0.70B.
+  - Computes PF, burden (B), spacing (S), subdrill (J), and calculated stemming with Top and Bottom initiation (Band E fixed at 0.70B).
   - Warnings for out-of-range ratios and invalid inputs.
 - Export and print:
   - `Print / Save PDF` for clean landscape report output.
